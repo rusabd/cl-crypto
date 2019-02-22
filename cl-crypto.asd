@@ -7,3 +7,12 @@
                (:file "ffi")
                (:file "digest")
                (:file "rsa")))
+
+(asdf:defsystem #:cl-crypto-test
+  :depends-on (:cl-crypto
+               :prove)
+  :defsystem-depends-on (:prove-asdf)
+  :components ((:file "tests"))
+  :perform (test-op :after (op c)
+                    (funcall (intern #.(string :run) :prove) c)))
+
