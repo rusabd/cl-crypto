@@ -34,6 +34,8 @@ yxHyXoZ9ZQYtiaF/24oKUmuJ52+fm1ih0HXJGv2hQW4Zes0TvQ==
 -----END RSA PRIVATE KEY-----
 ")
 
+(plan 2)
+
 (subtest "sha1 sign test1"
   (let ((key (load-rsa-key *test-rsa-key*)))
     (is "TIqxJ1MbpuX58qYPMJJYbyIt2TNUuadwJt1AqrEpOy9bXzfFKGKDEsFinx2I+2s7tFjXnbOy+MZBDQoQubpd3y/ldjrSxKUwLFrtHM9a0WuMMHyWQyFhibXxB06RTvgnmPsTq45hztDrma1+Ul7uOlHFiXoFXZkQA4xobB4zgBjW0JI1NnnMfwJ62bXU3KtAr2wQ3dhQdT6Nco3C4/znQL7EOMWBUER0tQcohWmHyviVNUDd++WFS0DMNWJtncQzjYvG+1UpROEWQSXR4vSZIuAMxBsps1xniytoMqjl3ReSQHoJEqD5lvlQh/q7J96hS8nPEShQjWVTfW0cRySWSg==" (sign key :sha1 "test1"))))
@@ -42,3 +44,6 @@ yxHyXoZ9ZQYtiaF/24oKUmuJ52+fm1ih0HXJGv2hQW4Zes0TvQ==
 (subtest "sha256 sign test1"
   (let ((key (load-rsa-key *test-rsa-key*)))
     (is "V8upoppSGdLUShKJ98HeslyDy+LEZ94m3jV3W+wtdhR/WHFfXxFZoxsGNObxTL1ZY6RSS3iKNQZCCW4+hHf4Oo9DTbZbRaJBmcRBfNvslQ5kK1wFPOzMWM+AMFUe2EltBMu67O/BvsdQ8Is3NNXbraWsuN83zcGWoSqO3tv+VKVg3RKAi1IKl8jnKftkWEpWbjqdEkUyXO81/RTjBbnfWVj6DEdUoEyvXzNiUAkwYkfGP79hvJoQ7Z5mVg3aR/SaZ2HKwI8yIvDY9/dd50kkTBIixXbwBSj5Z1KxSb8sfcAHy6bM9rmKn2Vvy1U/ldkpGxnMjKh0yVgG6RBZBezn9w==" (sign key :sha256 "test1"))))
+
+
+(finalize)

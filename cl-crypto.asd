@@ -12,7 +12,7 @@
   :depends-on (:cl-crypto
                :prove)
   :defsystem-depends-on (:prove-asdf)
-  :components ((:file "tests"))
+  :components ((:test-file "tests"))
   :perform (test-op :after (op c)
                     (funcall (intern #.(string :run) :prove) c)))
 
