@@ -8,6 +8,7 @@
 
 (defgeneric load-rsa-key (place))
 (defgeneric sign-length (key))
+(defgeneric key-size (key))
 
 (defmethod load-rsa-key ((text string))
   (cffi:with-foreign-string (rsa-key-string text)
@@ -33,3 +34,19 @@
          (cffi:with-foreign-array (digest digest-content `(:array :uchar ,digest-length))
            (rsa-sign (digest-nid digest-algo) digest digest-length output output-len (pointer key))
            (cffi:foreign-array-to-lisp output `(:array :uchar ,(sign-length key)))))))))
+
+
+(defmethod key-size ((key rsa-key))
+  (rsa-size (pointer key)))
+
+(defmethod encrypt ((key rsa-key) message)
+  (cffi:with-foreign-string ((input input-size) message)
+    (let ((output (cffi:foreign-alloc :uchar :count (key-size key))))
+      (unwind-protect
+           (let ((result (rsa-encrypt input-size input output (pointer key) +RSA_PKCS1_OAEP_PADDING+)))
+             (if (= -1 result)
+                 "failed"
+                 (cffi:foreign-array-to-lisp output `(:array :uchar ,result))))
+        (cffi:foreign-free output)))))
+      
+    

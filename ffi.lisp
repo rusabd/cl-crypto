@@ -32,3 +32,19 @@
   (len :int)
   (output :pointer))
 
+(cl+ssl::define-crypto-function ("RSA_size" rsa-size) :int
+  (key :pointer))
+
+
+(defparameter +RSA_PKCS1_1_PADDING+ 1)
+(defparameter +RSA_SSLV23_PADDING+ 2)
+(defparameter +RSA_NO_PADDING+ 3)
+(defparameter +RSA_PKCS1_OAEP_PADDING+ 4)
+
+(cl+ssl::define-crypto-function ("RSA_public_encrypt" rsa-encrypt) :int
+  (len :int)
+  (message :pointer)
+  (output :pointer)
+  (key :pointer)
+  (padding-type :int))
+  
